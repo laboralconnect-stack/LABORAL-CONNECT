@@ -194,6 +194,7 @@ footer{background:#0b1429;color:#c1c7d2;padding-top:65px}
 }
 
 /* Servicios y accesos de contacto — rediseño v2 */
+.profile-card{min-height:340px}
 .button-disabled{cursor:default;opacity:.72}
 .button-disabled:hover{border-color:rgba(255,255,255,.35)}
 .services-heading{margin-top:74px;margin-bottom:30px}
