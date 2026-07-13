@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Servicio laboral | Laboral Connect</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="legal-header"><div class="container"><a class="brand" href="/"><span class="brand-mark">LC</span><span>Laboral <b>Connect</b></span></a></div></header>
+  <main class="container legal-page service-placeholder">
+    <a class="back-link" href="/#servicios">← Volver a todos los servicios</a>
+    <p class="eyebrow"><span></span> Área de especialización</p>
+    <h1 id="service-title">Servicio laboral</h1>
+    <p class="placeholder-lead">Estamos preparando la información detallada de este servicio.</p>
+    <p>Mientras tanto, puedes contarnos tu situación y recibir una atención directa y personalizada.</p>
+    <a class="button button-primary" href="mailto:laboralconnect@gmail.com?subject=Consulta%20sobre%20servicios">Consultar este servicio <span aria-hidden="true">→</span></a>
+  </main>
+  <script>
+    const names={nominas:'Nóminas',contratos:'Contratos',despidos:'Despidos',finiquitos:'Finiquitos','incapacidad-temporal':'Incapacidad Temporal','seguridad-social':'Seguridad Social','convenios-colectivos':'Convenios Colectivos','auditoria-laboral':'Auditoría Laboral','consultoria-laboral':'Consultoría Laboral','gestion-documental':'Gestión documental'};
+    const slug=new URLSearchParams(location.search).get('area')||location.pathname.split('/').filter(Boolean).pop();
+    const name=names[slug]||'Servicio laboral';
+    document.querySelector('#service-title').textContent=name;
+    document.title=`${name} | Laboral Connect`;
+  </script>
+</body>
+</html>
