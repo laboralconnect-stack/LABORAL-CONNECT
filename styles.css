@@ -215,5 +215,7 @@ footer{background:#0b1429;color:#c1c7d2;padding-top:65px}
 .about-contact>a:hover{border-color:var(--gold);color:#846a16}
 .about-contact>a>span,.about-contact-disabled>span{color:#9a7b1a;font-size:16px}
 .about-contact-disabled{opacity:.55;cursor:default}
+.contact-symbol svg{width:23px;height:23px;display:block;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.contact-symbol svg .icon-fill{fill:currentColor;stroke:none}
 @media(max-width:850px){.services-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:560px){.services-heading{margin-top:58px}.services-grid{grid-template-columns:1fr}.service-card{min-height:175px}}
