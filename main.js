@@ -110,3 +110,12 @@ adviceForm?.addEventListener('submit', async event => {
     syncAdviceSubmit();
   }
 });
+
+const whatsappFloat = document.querySelector('.whatsapp-float');
+const pageFooter = document.querySelector('footer');
+if (whatsappFloat && pageFooter && 'IntersectionObserver' in window) {
+  const footerObserver = new IntersectionObserver(entries => {
+    whatsappFloat.classList.toggle('footer-visible', entries[0].isIntersecting);
+  }, { threshold: 0.01 });
+  footerObserver.observe(pageFooter);
+}
