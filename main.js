@@ -6,7 +6,7 @@ menuButton?.addEventListener('click', () => {
   menuButton.setAttribute('aria-expanded', String(!open));
   nav.classList.toggle('open', !open);
 });
-nav?.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+nav?.querySelectorAll('a, button').forEach(link => link.addEventListener('click', () => {
   nav.classList.remove('open'); menuButton?.setAttribute('aria-expanded', 'false');
 }));
 document.querySelector('#year').textContent = new Date().getFullYear();
@@ -32,3 +32,81 @@ if (choice === 'accepted') loadAnalytics();
 document.querySelector('.accept-cookies')?.addEventListener('click', () => { localStorage.setItem('lc-cookie-consent','accepted'); banner.hidden = true; loadAnalytics(); });
 document.querySelector('.reject-cookies')?.addEventListener('click', () => { localStorage.setItem('lc-cookie-consent','rejected'); banner.hidden = true; });
 document.querySelector('.cookie-settings')?.addEventListener('click', () => { banner.hidden = false; });
+
+const adviceModal = document.querySelector('.advice-modal');
+const adviceDialog = document.querySelector('.advice-dialog');
+const adviceForm = document.querySelector('.advice-form');
+const adviceConsent = adviceForm?.querySelector('[name="consentimiento"]');
+const adviceSubmit = adviceForm?.querySelector('.advice-submit');
+const adviceError = adviceForm?.querySelector('.form-error');
+const adviceSuccess = adviceModal?.querySelector('.advice-success');
+let adviceTrigger = null;
+
+function syncAdviceSubmit() {
+  if (adviceSubmit) adviceSubmit.disabled = !adviceConsent?.checked;
+}
+
+function openAdviceModal(event) {
+  adviceTrigger = event.currentTarget;
+  if (adviceSuccess && !adviceSuccess.hidden) {
+    adviceSuccess.hidden = true;
+    adviceForm.hidden = false;
+    adviceError.hidden = true;
+    syncAdviceSubmit();
+  }
+  adviceModal.hidden = false;
+  adviceModal.setAttribute('aria-hidden', 'false');
+  document.body.classList.add('modal-open');
+  adviceModal.querySelector('input:not([type="hidden"])')?.focus();
+}
+
+function closeAdviceModal() {
+  adviceModal.hidden = true;
+  adviceModal.setAttribute('aria-hidden', 'true');
+  document.body.classList.remove('modal-open');
+  adviceTrigger?.focus();
+}
+
+document.querySelectorAll('[data-open-advice]').forEach(button => button.addEventListener('click', openAdviceModal));
+adviceModal?.querySelectorAll('[data-close-advice]').forEach(button => button.addEventListener('click', closeAdviceModal));
+adviceConsent?.addEventListener('change', syncAdviceSubmit);
+syncAdviceSubmit();
+
+document.addEventListener('keydown', event => {
+  if (adviceModal?.hidden) return;
+  if (event.key === 'Escape') { closeAdviceModal(); return; }
+  if (event.key !== 'Tab') return;
+  const focusable = [...adviceDialog.querySelectorAll('button:not([disabled]), input:not([disabled]):not([type="hidden"]), select:not([disabled]), textarea:not([disabled]), a[href]')];
+  if (!focusable.length) return;
+  const first = focusable[0];
+  const last = focusable[focusable.length - 1];
+  if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+  else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+});
+
+adviceForm?.addEventListener('submit', async event => {
+  event.preventDefault();
+  adviceError.hidden = true;
+  if (!adviceForm.checkValidity()) { adviceForm.reportValidity(); return; }
+  const originalText = adviceSubmit.textContent;
+  adviceSubmit.disabled = true;
+  adviceSubmit.textContent = 'Enviando…';
+  try {
+    const response = await fetch(adviceForm.action, {
+      method: 'POST',
+      body: new FormData(adviceForm),
+      headers: { Accept: 'application/json' }
+    });
+    if (!response.ok) throw new Error('Formspree response was not successful');
+    adviceForm.hidden = true;
+    adviceSuccess.hidden = false;
+    adviceSuccess.focus();
+    adviceForm.reset();
+  } catch (error) {
+    adviceError.hidden = false;
+    adviceError.focus?.();
+  } finally {
+    adviceSubmit.textContent = originalText;
+    syncAdviceSubmit();
+  }
+});

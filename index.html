@@ -19,7 +19,7 @@
       <button class="menu-button" type="button" aria-expanded="false" aria-controls="main-nav"><span></span><span></span><span></span><span class="sr-only">Abrir menú</span></button>
       <nav id="main-nav" aria-label="Navegación principal">
         <a href="#servicios">Servicios</a><a href="#ventajas">Por qué elegirnos</a><a href="#proceso">Cómo trabajamos</a><a href="#sobre-mi">Sobre mí</a>
-        <a class="nav-cta" href="#contacto">Hablemos</a>
+        <button class="nav-cta" type="button" data-open-advice>Hablemos</button>
       </nav>
     </div>
   </header>
@@ -31,7 +31,7 @@
           <p class="eyebrow"><span></span> Asesoramiento laboral online</p>
           <h1>Tu tranquilidad laboral, <em>nuestro compromiso.</em></h1>
           <p class="hero-lead">Soluciones claras para empresas, autónomos y trabajadores, con atención personalizada y gestión directa de principio a fin.</p>
-          <div class="button-row"><a class="button button-primary" href="#contacto">Solicitar asesoramiento <span aria-hidden="true">→</span></a><span class="button button-ghost button-disabled" aria-disabled="true">Hablar por WhatsApp</span></div>
+          <div class="button-row"><button class="button button-primary" type="button" data-open-advice>Solicitar asesoramiento <span aria-hidden="true">→</span></button><span class="button button-ghost button-disabled" aria-disabled="true">Hablar por WhatsApp</span></div>
           <p class="microcopy"><span aria-hidden="true">●</span> Respuesta en menos de 24 h laborables</p>
         </div>
         <div class="hero-visual reveal">
@@ -103,6 +103,32 @@
   <footer><div class="container footer-grid"><div><a class="brand brand-footer" href="#inicio"><span class="brand-mark">LC</span><span>Laboral <b>Connect</b></span></a><p>Asesoramiento laboral online, profesional y cercano.</p></div><div><h2>Explora</h2><a href="#servicios">Servicios</a><a href="#proceso">Cómo trabajamos</a><a href="#sobre-mi">Sobre mí</a></div><div><h2>Legal</h2><a href="aviso-legal.html">Aviso legal</a><a href="privacidad.html">Privacidad</a><a href="cookies.html">Cookies</a><button class="cookie-settings" type="button">Configurar cookies</button></div><div><h2>Contacto</h2><a href="mailto:laboralconnect@gmail.com">laboralconnect@gmail.com</a><a href="https://www.instagram.com/laboral_connect/" target="_blank" rel="noopener">@laboral_connect</a></div></div><div class="container footer-bottom"><span>© <span id="year"></span> Laboral Connect</span><span>Tu tranquilidad laboral, nuestro compromiso.</span></div></footer>
 
   <div class="cookie-banner" role="dialog" aria-modal="true" aria-labelledby="cookie-title" hidden><div><h2 id="cookie-title">Tu privacidad importa</h2><p>Usamos cookies analíticas solo con tu permiso para comprender cómo se utiliza esta web. Puedes aceptar, rechazar o leer la <a href="cookies.html">política de cookies</a>.</p></div><div class="cookie-actions"><button class="button button-ghost reject-cookies" type="button">Rechazar</button><button class="button button-primary accept-cookies" type="button">Aceptar analíticas</button></div></div>
+
+  <div class="advice-modal" hidden aria-hidden="true">
+    <div class="advice-backdrop" data-close-advice></div>
+    <section class="advice-dialog" role="dialog" aria-modal="true" aria-labelledby="advice-title" aria-describedby="advice-subtitle">
+      <button class="advice-close" type="button" data-close-advice aria-label="Cerrar formulario">×</button>
+      <div class="advice-header"><p class="eyebrow"><span></span> Atención personalizada</p><h2 id="advice-title">Solicita tu asesoramiento</h2><p id="advice-subtitle">Cuéntanos tu situación y te responderemos en menos de 24 h laborables.</p></div>
+      <div class="advice-success" hidden tabindex="-1"><span aria-hidden="true">✓</span><h3>Solicitud enviada</h3><p>Te responderemos en menos de 24 h laborables.</p><button class="button button-primary" type="button" data-close-advice>Cerrar</button></div>
+      <form class="advice-form" action="https://formspree.io/f/mwvgqadv" method="POST">
+        <input type="hidden" name="_subject" value="Nueva solicitud de asesoramiento — Laboral Connect">
+        <label class="form-honeypot" aria-hidden="true">No completar<input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label>
+        <div class="form-grid">
+          <label><span>Nombre y apellidos <b>*</b></span><input type="text" name="nombre" autocomplete="name" required></label>
+          <label><span>Empresa o autónomo <small>(opcional)</small></span><input type="text" name="empresa" autocomplete="organization"></label>
+          <label><span>Teléfono <b>*</b></span><input type="tel" name="telefono" autocomplete="tel" required></label>
+          <label><span>Correo electrónico <b>*</b></span><input type="email" name="email" autocomplete="email" required></label>
+          <label><span>Perfil <b>*</b></span><select name="perfil" required><option value="" selected disabled>Selecciona una opción</option><option>Empresa</option><option>Autónomo</option><option>Trabajador</option></select></label>
+          <label><span>¿Qué necesitas? <b>*</b></span><select name="necesidad" required><option value="" selected disabled>Selecciona un servicio</option><option>Nóminas</option><option>Contratos</option><option>Despidos</option><option>Finiquitos</option><option>Incapacidad Temporal</option><option>Seguridad Social</option><option>Convenios Colectivos</option><option>Auditoría Laboral</option><option>Consultoría Laboral</option><option>Gestión documental</option><option>Otro</option></select></label>
+          <label class="form-wide"><span>Mensaje breve <small>(opcional)</small></span><textarea name="mensaje" rows="4"></textarea></label>
+        </div>
+        <label class="consent-field"><input type="checkbox" name="consentimiento" required><span>He leído y acepto la <a href="privacidad.html" target="_blank" rel="noopener">Política de Privacidad</a> para el tratamiento de mis datos.</span></label>
+        <p class="form-error" role="alert" hidden>No se ha podido enviar la solicitud. Inténtalo de nuevo o escríbenos a laboralconnect@gmail.com.</p>
+        <button class="button button-primary advice-submit" type="submit" disabled>Enviar solicitud</button>
+        <p class="form-trust">Atención confidencial. Sin compromiso.</p>
+      </form>
+    </section>
+  </div>
   <script src="main.js"></script>
 </body>
 </html>
