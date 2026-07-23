@@ -195,8 +195,6 @@ footer{background:#0b1429;color:#c1c7d2;padding-top:65px}
 
 /* Servicios y accesos de contacto — rediseño v2 */
 .profile-card{min-height:340px}
-.button-disabled{cursor:default;opacity:.72}
-.button-disabled:hover{border-color:rgba(255,255,255,.35)}
 .services-heading{margin-top:74px;margin-bottom:30px}
 .services-heading .eyebrow{margin-bottom:13px}
 .services-heading h3{font-size:clamp(30px,3vw,42px);margin-bottom:9px}
@@ -306,3 +304,31 @@ body.modal-open .whatsapp-float{opacity:0;visibility:hidden;pointer-events:none}
   footer{padding-bottom:88px}
 }
 @media(prefers-reduced-motion:reduce){.whatsapp-float{transition:none}}
+
+/* Footer y páginas legales — rediseño premium v6 */
+.site-footer{position:relative;background:#0b1324;color:#d5d9e2;padding:0;border-top:1px solid rgba(201,162,39,.42)}
+.footer-intro{display:flex;align-items:center;justify-content:space-between;gap:30px;padding-top:54px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.1)}
+.footer-intro p{margin:0;color:#aeb6c5;font-size:13px;letter-spacing:.02em}
+.site-footer .footer-grid{grid-template-columns:repeat(3,1fr);gap:clamp(50px,9vw,140px);padding-top:48px;padding-bottom:48px}
+.site-footer .footer-grid nav,.site-footer .footer-grid>div{display:flex;flex-direction:column;align-items:flex-start}
+.site-footer .footer-grid h2{margin:0 0 20px;color:#fff;font-size:11px;font-weight:700;letter-spacing:.18em}
+.site-footer .footer-grid a,.site-footer .cookie-settings{position:relative;display:inline-block;margin:0 0 12px;padding:0 0 3px;color:#cbd1dc;font-family:var(--sans);font-size:13px;line-height:1.5;transition:color .2s ease,transform .2s ease}
+.site-footer .footer-grid a:after,.site-footer .cookie-settings:after{content:"";position:absolute;left:0;right:100%;bottom:0;height:1px;background:var(--gold);transition:right .25s ease}
+.site-footer .footer-grid a:hover,.site-footer .cookie-settings:hover{color:#fff;transform:translateX(3px)}
+.site-footer .footer-grid a:hover:after,.site-footer .cookie-settings:hover:after{right:0}
+.site-footer .cookie-settings{text-align:left}
+.site-footer .footer-bottom{justify-content:flex-start;margin-top:0;padding:22px 0 26px;border-top:1px solid rgba(255,255,255,.1);color:#8f98a9;font-size:11px}
+.legal-header{border-bottom:1px solid rgba(201,162,39,.35)}
+.legal-page{max-width:920px;padding-top:82px;padding-bottom:110px}
+.legal-kicker{margin:0 0 14px;color:#8c7119!important;font-size:11px!important;font-weight:700;text-transform:uppercase;letter-spacing:.18em}
+.legal-page h1{font-size:clamp(43px,6vw,66px);line-height:1.05;margin-bottom:22px}
+.legal-page h2{padding-top:8px;border-top:1px solid var(--line);font-size:28px}
+.legal-page a:not(.back-link){color:#806817;text-decoration:underline;text-underline-offset:3px}
+.legal-page .placeholder{display:inline-block;background:#fff2bd;color:#4e431e;border-radius:2px;padding:2px 6px}
+@media(max-width:850px){.site-footer .footer-grid{grid-template-columns:repeat(3,1fr);gap:35px}}
+@media(max-width:650px){
+  .footer-intro{display:block;padding-top:42px;padding-bottom:32px}.footer-intro p{margin-top:18px}
+  .site-footer .footer-grid{grid-template-columns:1fr;gap:34px;padding-top:38px;padding-bottom:35px}
+  .site-footer .footer-bottom{padding-bottom:92px}
+  .legal-page{padding-top:58px;padding-bottom:78px}
+}

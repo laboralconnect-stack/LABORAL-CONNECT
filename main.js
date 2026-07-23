@@ -9,7 +9,7 @@ menuButton?.addEventListener('click', () => {
 nav?.querySelectorAll('a, button').forEach(link => link.addEventListener('click', () => {
   nav.classList.remove('open'); menuButton?.setAttribute('aria-expanded', 'false');
 }));
-document.querySelector('#year').textContent = new Date().getFullYear();
+document.querySelector('#year')?.replaceChildren(String(new Date().getFullYear()));
 
 const reveal = new IntersectionObserver(entries => entries.forEach(entry => {
   if (entry.isIntersecting) { entry.target.classList.add('visible'); reveal.unobserve(entry.target); }
@@ -18,7 +18,7 @@ document.querySelectorAll('.reveal').forEach(el => reveal.observe(el));
 
 const banner = document.querySelector('.cookie-banner');
 const choice = localStorage.getItem('lc-cookie-consent');
-if (!choice) banner.hidden = false;
+if (banner && (!choice || location.hash === '#configurar-cookies')) banner.hidden = false;
 function loadAnalytics() {
   if (!/^G-[A-Z0-9]+$/.test(GA_MEASUREMENT_ID)) return;
   const script = document.createElement('script');
